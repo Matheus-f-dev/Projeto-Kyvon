@@ -1,0 +1,385 @@
+@import 'tailwindcss';
+
+/**
+ * Design tokens do Kyvon OS.
+ *
+ * Princípio: tipografia, espaçamento e hierarquia carregam a interface —
+ * não bordas, sombras e caixas. A paleta é quase toda neutra, com uma única
+ * cor de marca usada com parcimônia, para que ela signifique alguma coisa
+ * quando aparece.
+ *
+ * Neutros têm um leve viés frio (matiz 260) em vez de cinza puro: a tela
+ * ganha profundidade sem que nenhuma superfície pareça colorida.
+ */
+
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+/* ── Tema claro (padrão) ─────────────────────────────────────────────────── */
+:root {
+  color-scheme: light;
+
+  /* Superfícies, da mais funda para a mais alta */
+  --surface-sunken: oklch(0.968 0.003 260);
+  --surface-base: oklch(0.993 0.002 260);
+  --surface-raised: oklch(1 0 0);
+  --surface-overlay: oklch(1 0 0);
+  --surface-hover: oklch(0.965 0.004 260);
+  --surface-active: oklch(0.94 0.006 260);
+
+  /* Texto, do mais forte para o mais fraco */
+  --text-strong: oklch(0.21 0.014 260);
+  --text-default: oklch(0.32 0.012 260);
+  --text-muted: oklch(0.53 0.012 260);
+  --text-subtle: oklch(0.65 0.011 260);
+  --text-inverted: oklch(0.99 0 0);
+
+  /* Linhas */
+  --line-subtle: oklch(0.925 0.005 260);
+  --line-default: oklch(0.885 0.006 260);
+  --line-strong: oklch(0.8 0.008 260);
+
+  /* Marca — azul-cobalto. Ação primária, foco e seleção. */
+  --brand: oklch(0.545 0.186 264);
+  --brand-hover: oklch(0.495 0.19 264);
+  --brand-active: oklch(0.45 0.185 264);
+  --brand-soft: oklch(0.955 0.025 264);
+  --brand-soft-hover: oklch(0.925 0.04 264);
+  --brand-border: oklch(0.86 0.06 264);
+  --brand-text: oklch(0.47 0.18 264);
+  --on-brand: oklch(0.99 0 0);
+
+  /* Semânticas: cor forte, fundo suave, borda e texto legível sobre o suave */
+  --success: oklch(0.58 0.14 155);
+  --success-soft: oklch(0.955 0.04 155);
+  --success-border: oklch(0.86 0.07 155);
+  --success-text: oklch(0.45 0.12 155);
+
+  --warning: oklch(0.72 0.15 72);
+  --warning-soft: oklch(0.96 0.045 72);
+  --warning-border: oklch(0.87 0.08 72);
+  --warning-text: oklch(0.5 0.12 62);
+
+  --danger: oklch(0.57 0.205 25);
+  --danger-soft: oklch(0.96 0.03 25);
+  --danger-border: oklch(0.88 0.06 25);
+  --danger-text: oklch(0.49 0.19 25);
+
+  --info: oklch(0.6 0.13 235);
+  --info-soft: oklch(0.955 0.035 235);
+  --info-border: oklch(0.86 0.06 235);
+  --info-text: oklch(0.47 0.12 235);
+
+  --accent: oklch(0.55 0.19 305);
+  --accent-soft: oklch(0.955 0.035 305);
+  --accent-border: oklch(0.87 0.06 305);
+  --accent-text: oklch(0.47 0.17 305);
+
+  --neutral-soft: oklch(0.955 0.004 260);
+  --neutral-border: oklch(0.885 0.006 260);
+  --neutral-text: oklch(0.45 0.012 260);
+
+  --ring: oklch(0.545 0.186 264);
+
+  /* Sombras: só onde há elevação real (popover, drawer, modal). */
+  --shadow-raised: 0 1px 2px oklch(0.2 0.02 260 / 0.06);
+  --shadow-overlay:
+    0 0 0 1px oklch(0.2 0.02 260 / 0.04), 0 8px 24px -6px oklch(0.2 0.02 260 / 0.14),
+    0 2px 6px -2px oklch(0.2 0.02 260 / 0.08);
+}
+
+/* ── Tema escuro ─────────────────────────────────────────────────────────── */
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  --surface-sunken: oklch(0.155 0.008 265);
+  --surface-base: oklch(0.185 0.009 265);
+  --surface-raised: oklch(0.215 0.01 265);
+  --surface-overlay: oklch(0.235 0.011 265);
+  --surface-hover: oklch(0.245 0.012 265);
+  --surface-active: oklch(0.285 0.014 265);
+
+  --text-strong: oklch(0.975 0.003 265);
+  --text-default: oklch(0.9 0.005 265);
+  --text-muted: oklch(0.7 0.01 265);
+  --text-subtle: oklch(0.57 0.012 265);
+  --text-inverted: oklch(0.17 0.01 265);
+
+  --line-subtle: oklch(0.27 0.012 265);
+  --line-default: oklch(0.32 0.014 265);
+  --line-strong: oklch(0.42 0.016 265);
+
+  --brand: oklch(0.645 0.175 266);
+  --brand-hover: oklch(0.7 0.165 266);
+  --brand-active: oklch(0.74 0.15 266);
+  --brand-soft: oklch(0.3 0.055 266);
+  --brand-soft-hover: oklch(0.35 0.07 266);
+  --brand-border: oklch(0.42 0.09 266);
+  --brand-text: oklch(0.8 0.11 266);
+  --on-brand: oklch(0.99 0 0);
+
+  --success: oklch(0.68 0.145 155);
+  --success-soft: oklch(0.28 0.045 155);
+  --success-border: oklch(0.38 0.07 155);
+  --success-text: oklch(0.82 0.12 155);
+
+  --warning: oklch(0.79 0.145 75);
+  --warning-soft: oklch(0.3 0.05 68);
+  --warning-border: oklch(0.41 0.075 70);
+  --warning-text: oklch(0.87 0.12 78);
+
+  --danger: oklch(0.65 0.19 25);
+  --danger-soft: oklch(0.29 0.06 25);
+  --danger-border: oklch(0.4 0.09 25);
+  --danger-text: oklch(0.81 0.13 25);
+
+  --info: oklch(0.69 0.12 235);
+  --info-soft: oklch(0.28 0.045 235);
+  --info-border: oklch(0.38 0.07 235);
+  --info-text: oklch(0.83 0.09 235);
+
+  --accent: oklch(0.67 0.16 305);
+  --accent-soft: oklch(0.29 0.055 305);
+  --accent-border: oklch(0.4 0.08 305);
+  --accent-text: oklch(0.83 0.11 305);
+
+  --neutral-soft: oklch(0.26 0.01 265);
+  --neutral-border: oklch(0.34 0.012 265);
+  --neutral-text: oklch(0.76 0.01 265);
+
+  --ring: oklch(0.7 0.155 266);
+
+  --shadow-raised: 0 1px 2px oklch(0 0 0 / 0.3);
+  --shadow-overlay:
+    0 0 0 1px oklch(0 0 0 / 0.4), 0 10px 30px -8px oklch(0 0 0 / 0.55),
+    0 3px 8px -3px oklch(0 0 0 / 0.4);
+}
+
+/* ── Ponte para o Tailwind ───────────────────────────────────────────────── */
+@theme inline {
+  --color-sunken: var(--surface-sunken);
+  --color-base: var(--surface-base);
+  --color-raised: var(--surface-raised);
+  --color-overlay: var(--surface-overlay);
+  --color-hover: var(--surface-hover);
+  --color-active: var(--surface-active);
+
+  --color-strong: var(--text-strong);
+  --color-default: var(--text-default);
+  --color-muted: var(--text-muted);
+  --color-subtle: var(--text-subtle);
+  --color-inverted: var(--text-inverted);
+
+  --color-line: var(--line-default);
+  --color-line-subtle: var(--line-subtle);
+  --color-line-strong: var(--line-strong);
+
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
+  --color-brand-active: var(--brand-active);
+  --color-brand-soft: var(--brand-soft);
+  --color-brand-soft-hover: var(--brand-soft-hover);
+  --color-brand-border: var(--brand-border);
+  --color-brand-text: var(--brand-text);
+  --color-on-brand: var(--on-brand);
+
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-success-border: var(--success-border);
+  --color-success-text: var(--success-text);
+
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-warning-border: var(--warning-border);
+  --color-warning-text: var(--warning-text);
+
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-danger-border: var(--danger-border);
+  --color-danger-text: var(--danger-text);
+
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+  --color-info-border: var(--info-border);
+  --color-info-text: var(--info-text);
+
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-border: var(--accent-border);
+  --color-accent-text: var(--accent-text);
+
+  --color-neutral-soft: var(--neutral-soft);
+  --color-neutral-border: var(--neutral-border);
+  --color-neutral-text: var(--neutral-text);
+
+  --color-ring: var(--ring);
+
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, 'Segoe UI Variable Text', 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  --font-mono:
+    ui-monospace, 'Cascadia Code', 'Segoe UI Mono', 'SF Mono', Menlo, Consolas, monospace;
+
+  /* Escala tipográfica compacta: densidade sem perder legibilidade. */
+  --text-2xs: 0.6875rem; /* 11px — rótulos, metadados */
+  --text-2xs--line-height: 1rem;
+  --text-xs: 0.75rem; /* 12px — tabelas densas, badges */
+  --text-xs--line-height: 1.125rem;
+  --text-sm: 0.8125rem; /* 13px — texto de interface padrão */
+  --text-sm--line-height: 1.25rem;
+  --text-base: 0.875rem; /* 14px — corpo */
+  --text-base--line-height: 1.375rem;
+  --text-lg: 1rem; /* 16px */
+  --text-lg--line-height: 1.5rem;
+  --text-xl: 1.125rem; /* 18px — título de seção */
+  --text-xl--line-height: 1.625rem;
+  --text-2xl: 1.375rem; /* 22px — título de página */
+  --text-2xl--line-height: 1.875rem;
+  --text-3xl: 1.75rem; /* 28px — números de destaque */
+  --text-3xl--line-height: 2.125rem;
+
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.625rem;
+  --radius-xl: 0.875rem;
+
+  --shadow-raised: var(--shadow-raised);
+  --shadow-overlay: var(--shadow-overlay);
+
+  /* Animações curtas e funcionais — nunca decorativas. */
+  --animate-fade-in: fade-in 120ms ease-out;
+  --animate-slide-up: slide-up 160ms cubic-bezier(0.32, 0.72, 0, 1);
+  --animate-slide-left: slide-left 200ms cubic-bezier(0.32, 0.72, 0, 1);
+  --animate-shimmer: shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-left {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes shimmer {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* ── Base ────────────────────────────────────────────────────────────────── */
+@layer base {
+  * {
+    border-color: var(--line-subtle);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--surface-sunken);
+    color: var(--text-default);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: var(--text-base--line-height);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings:
+      'cv05' 1,
+      'ss01' 1;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: var(--text-strong);
+    font-weight: 600;
+    letter-spacing: -0.011em;
+  }
+
+  /* Números alinham em colunas de tabela sem dançar. */
+  table,
+  [data-tabular] {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Foco visível só via teclado — o anel não aparece em clique de mouse. */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+    border-radius: var(--radius-xs);
+  }
+
+  ::selection {
+    background-color: var(--brand-soft-hover);
+    color: var(--text-strong);
+  }
+
+  /* Barra de rolagem discreta, no tom da superfície. */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--line-strong) transparent;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--line-default);
+    border-radius: 9999px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--line-strong);
+  }
+}
+
+@layer utilities {
+  /* Respeita quem pediu menos movimento no sistema operacional. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
