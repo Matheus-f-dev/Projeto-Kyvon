@@ -17,6 +17,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { Kbd } from '@/components/ui/misc'
+import { SETTINGS_PERMISSIONS } from '@/components/settings/sections'
 import { ThemeSwitcher } from '@/components/theme'
 import { logoutAction } from '@/server/modules/auth/actions'
 import type { PermissionKey } from '@/shared/permissions'
@@ -147,7 +148,7 @@ export function Header({ user, permissions, unreadNotifications, onOpenMobileMen
             </Link>
           </DropdownMenuItem>
 
-          {permissionSet.has('settings.manage') && (
+          {SETTINGS_PERMISSIONS.some((permission) => permissionSet.has(permission)) && (
             <DropdownMenuItem asChild>
               <Link href="/configuracoes">
                 <Settings />

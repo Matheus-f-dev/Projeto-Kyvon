@@ -94,6 +94,7 @@ src/
     db/                   Schema Drizzle, migrations, seed
     modules/<módulo>/     Regra de negócio: queries · service · actions
     security/             Rate limiting
+    storage/              Drivers de arquivo (local em dev, Supabase em produção)
   shared/                 Schemas Zod e tipos usados nos dois lados
 tests/                    Vitest contra PostgreSQL real
 ```

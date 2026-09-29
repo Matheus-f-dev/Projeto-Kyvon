@@ -55,6 +55,7 @@
     "react-hook-form": "^7.89.0",
     "sonner": "^2.0.8",
     "tailwind-merge": "^3.7.0",
+    "vercel": "^60.1.3",
     "zod": "^4.6.5"
   },
   "devDependencies": {

@@ -31,6 +31,16 @@ async function main() {
     return
   }
 
+  // `NODE_ENV=development` apontando para o Supabase é um uso legítimo (dev
+  // contra o banco hospedado) — e é exatamente onde um reset seria desastroso.
+  // Só bancos nesta máquina podem ser apagados.
+  const host = new URL(env.DATABASE_URL).hostname
+  if (!['localhost', '127.0.0.1', '::1', '[::1]'].includes(host)) {
+    throw new Error(
+      `db:reset só apaga banco local; DATABASE_URL aponta para "${host}". Remova-a do .env.local para resetar o PGlite.`,
+    )
+  }
+
   try {
     const tables = await executeRows<{ tablename: string }>(
       sql`SELECT tablename FROM pg_tables WHERE schemaname = 'public'`,

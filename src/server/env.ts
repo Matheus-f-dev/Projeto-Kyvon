@@ -64,6 +64,9 @@ const baseSchema = z.object({
   APP_TIMEZONE: requiredString('America/Sao_Paulo'),
 
   ALLOW_DEMO_SEED: booleanFromEnv(true),
+
+  /** Definida pela própria Vercel em todo build e função (`1`). */
+  VERCEL: optionalString,
 })
 
 const envSchema = baseSchema.superRefine((env, ctx) => {
@@ -78,6 +81,21 @@ const envSchema = baseSchema.superRefine((env, ctx) => {
     )
     if (missing.length > 0) {
       fail('STORAGE_DRIVER', `STORAGE_DRIVER=supabase exige: ${missing.join(', ')}.`)
+    }
+  }
+
+  // Na Vercel o sistema de arquivos das funções é somente leitura e o corpo da
+  // requisição tem teto de 4,5 MB (ADR-010). Sem estas travas, o primeiro
+  // upload falharia longe de quem configurou.
+  if (env.VERCEL) {
+    if (env.STORAGE_DRIVER !== 'supabase') {
+      fail('STORAGE_DRIVER', 'Na Vercel o disco é somente leitura: use STORAGE_DRIVER=supabase.')
+    }
+    if (env.STORAGE_MAX_FILE_SIZE_MB > 4) {
+      fail(
+        'STORAGE_MAX_FILE_SIZE_MB',
+        'Na Vercel o corpo da requisição é limitado a 4,5 MB: defina no máximo 4.',
+      )
     }
   }
 
@@ -104,8 +122,13 @@ const envSchema = baseSchema.superRefine((env, ctx) => {
 
 export type Env = z.infer<typeof baseSchema>
 
+/** Valida um conjunto de variáveis sem cache — usado no boot e nos testes. */
+export function validateEnv(source: Record<string, string | undefined>) {
+  return envSchema.safeParse(source)
+}
+
 function loadEnv(): Env {
-  const parsed = envSchema.safeParse(process.env)
+  const parsed = validateEnv(process.env)
 
   if (!parsed.success) {
     const details = parsed.error.issues

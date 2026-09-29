@@ -1,0 +1,10 @@
+# Nunca enviar para a Vercel: segredos locais, bancos e arquivos de desenvolvimento.
+.env
+.env.*
+!.env.example
+.data
+storage
+.next
+node_modules
+coverage
+*.tsbuildinfo

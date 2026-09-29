@@ -460,6 +460,63 @@ export const USER_STATUS = meta({
   suspended: { label: 'Suspenso', tone: 'danger' },
 })
 
+// ── Administração ────────────────────────────────────────────────────────────
+
+export const AUDIT_ACTION = meta({
+  create: { label: 'Criação', tone: 'success' },
+  update: { label: 'Alteração', tone: 'info' },
+  delete: { label: 'Exclusão', tone: 'danger' },
+  login: { label: 'Login', tone: 'neutral' },
+  logout: { label: 'Logout', tone: 'neutral' },
+  login_failed: { label: 'Login recusado', tone: 'warning' },
+  permission_change: { label: 'Permissão', tone: 'accent' },
+  export: { label: 'Exportação', tone: 'neutral' },
+})
+
+/** Rótulo das entidades referenciadas por auditoria, atividade e notificação. */
+export const ENTITY_TYPE_LABEL: Record<string, string> = {
+  user: 'Usuário',
+  role: 'Perfil',
+  session: 'Sessão',
+  client: 'Cliente',
+  contact: 'Contato',
+  lead: 'Lead',
+  opportunity: 'Oportunidade',
+  proposal: 'Proposta',
+  contract: 'Contrato',
+  contract_addendum: 'Aditivo',
+  project: 'Projeto',
+  project_stage: 'Etapa',
+  project_template: 'Template',
+  task: 'Tarefa',
+  task_comment: 'Comentário',
+  approval: 'Aprovação',
+  approval_version: 'Versão de aprovação',
+  scope_change: 'Mudança de escopo',
+  support_ticket: 'Chamado',
+  marketing_campaign: 'Campanha',
+  marketing_content: 'Conteúdo',
+  case: 'Case',
+  file: 'Arquivo',
+  setting: 'Configuração',
+}
+
+/** Rótulo dos módulos do catálogo de permissões (`PERMISSIONS[].module`). */
+export const PERMISSION_MODULE_LABEL: Record<string, string> = {
+  clients: 'Clientes',
+  crm: 'Comercial',
+  contracts: 'Contratos',
+  projects: 'Projetos',
+  tasks: 'Tarefas',
+  approvals: 'Aprovações',
+  scope: 'Mudança de escopo',
+  marketing: 'Marketing',
+  support: 'Suporte',
+  files: 'Arquivos',
+  reports: 'Relatórios',
+  admin: 'Administração',
+}
+
 // ── Helper ───────────────────────────────────────────────────────────────────
 
 /**

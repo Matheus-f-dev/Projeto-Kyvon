@@ -133,6 +133,45 @@ export function ListFilterSelect({
   )
 }
 
+/** Campo de data (AAAA-MM-DD) sincronizado com um parâmetro da URL. */
+export function ListDateInput({
+  paramKey,
+  label,
+  className,
+}: {
+  paramKey: string
+  label: string
+  className?: string
+}) {
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+
+  const onChange = (next: string) => {
+    const params = new URLSearchParams(searchParams.toString())
+    if (next) params.set(paramKey, next)
+    else params.delete(paramKey)
+    params.delete('page')
+    router.replace(`${pathname}?${params.toString()}`, { scroll: false })
+  }
+
+  return (
+    <label className={cn('text-muted flex items-center gap-1.5 text-xs', className)}>
+      {label}
+      <input
+        type="date"
+        value={searchParams.get(paramKey) ?? ''}
+        onChange={(event) => onChange(event.target.value)}
+        className={cn(
+          'border-line bg-raised text-strong h-8 rounded-md border px-2 text-sm',
+          'hover:border-line-strong transition-colors',
+          'focus:border-brand focus:ring-brand/20 focus:ring-2 focus:outline-none',
+        )}
+      />
+    </label>
+  )
+}
+
 export function ListToolbar({ children, className }: { children: ReactNode; className?: string }) {
   return <div className={cn('flex flex-wrap items-center gap-2', className)}>{children}</div>
 }

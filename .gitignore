@@ -10,13 +10,14 @@ build/
 next-env.d.ts
 
 # local data (embedded postgres + uploaded files)
-.data/
-storage/
+/.data/
+/storage/
 
 # env
 .env
 .env.local
 .env.*.local
+.env*.bak
 
 # misc
 .DS_Store
@@ -27,3 +28,5 @@ yarn-error.log*
 .vercel
 *.tsbuildinfo
 coverage/
+
+.vercel

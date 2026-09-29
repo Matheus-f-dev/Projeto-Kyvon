@@ -47,7 +47,7 @@ describe('usuários', () => {
   it('cria com senha temporária válida, que funciona no login', async () => {
     const admin = await contextFor(await createTestUser('admin'))
     const address = email()
-    const { temporaryPassword } = await createUser(
+    const { id: createdId, temporaryPassword } = await createUser(
       { name: 'Nova Pessoa', email: address, roleId: await roleId('design') },
       admin,
     )
@@ -58,7 +58,7 @@ describe('usuários', () => {
       ipAddress: '127.0.0.1',
       userAgent: 'teste',
     })
-    expect(result.user.email).toBe(address)
+    expect(result.userId).toBe(createdId)
 
     await expect(
       createUser({ name: 'Outra', email: address, roleId: await roleId('design') }, admin),
